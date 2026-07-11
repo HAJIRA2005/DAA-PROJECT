@@ -1,0 +1,495 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Analysis | Lottery Number Analysis</title>
+    <link rel="stylesheet" href="style.css">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+</head>
+<body>
+    <header>
+        <nav class="navbar">
+            <div class="nav-container">
+                <div class="logo">🎰 Lottery Analyzer</div>
+                <ul class="nav-menu">
+                    <li><a href="index.html">Home</a></li>
+                    <li><a href="algorithms.html">Algorithms</a></li>
+                    <li><a href="analysis.html" class="active">Analysis</a></li>
+                    <li><a href="index.html#about">About</a></li>
+                </ul>
+            </div>
+        </nav>
+    </header>
+
+    <main>
+        <!-- Page Header -->
+        <section class="page-header">
+            <div class="container">
+                <h1>Analysis & Visualization</h1>
+                <p>Statistical analysis of lottery number patterns using randomised algorithms</p>
+            </div>
+        </section>
+
+        <!-- Analysis Controls -->
+        <section class="controls-section">
+            <div class="container">
+                <div class="control-panel">
+                    <h2>Lottery Simulator</h2>
+                    <div class="controls-grid">
+                        <div class="control-group">
+                            <label for="lotterySize">Lottery Size (numbers 1-N):</label>
+                            <input type="number" id="lotterySize" value="50" min="10" max="100">
+                        </div>
+                        <div class="control-group">
+                            <label for="numberCount">Numbers to Draw:</label>
+                            <input type="number" id="numberCount" value="6" min="1" max="20">
+                        </div>
+                        <div class="control-group">
+                            <label for="iterations">Iterations:</label>
+                            <input type="number" id="iterations" value="10000" min="100" max="100000" step="100">
+                        </div>
+                        <button class="btn btn-primary" id="runAnalysis">Run Analysis</button>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Results Display -->
+        <section class="analysis-results">
+            <div class="container">
+                <h2>Results</h2>
+                <div class="results-grid">
+                    <div class="result-card">
+                        <h3>Total Draws</h3>
+                        <p class="result-value" id="totalDraws">0</p>
+                    </div>
+                    <div class="result-card">
+                        <h3>Unique Numbers Drawn</h3>
+                        <p class="result-value" id="uniqueNumbers">0</p>
+                    </div>
+                    <div class="result-card">
+                        <h3>Most Frequent Number</h3>
+                        <p class="result-value" id="mostFrequent">-</p>
+                    </div>
+                    <div class="result-card">
+                        <h3>Average Frequency</h3>
+                        <p class="result-value" id="avgFrequency">0</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Charts Section -->
+        <section class="charts-section">
+            <div class="container">
+                <div class="charts-grid">
+                    <div class="chart-container">
+                        <h3>Frequency Distribution</h3>
+                        <canvas id="frequencyChart"></canvas>
+                    </div>
+                    <div class="chart-container">
+                        <h3>Cumulative Distribution</h3>
+                        <canvas id="cumulativeChart"></canvas>
+                    </div>
+                </div>
+                <div class="charts-grid">
+                    <div class="chart-container">
+                        <h3>Top 10 Most Frequent Numbers</h3>
+                        <canvas id="topNumbersChart"></canvas>
+                    </div>
+                    <div class="chart-container">
+                        <h3>Distribution Analysis</h3>
+                        <canvas id="distributionChart"></canvas>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Statistical Analysis -->
+        <section class="stats-analysis">
+            <div class="container">
+                <h2>Statistical Analysis</h2>
+                <div class="analysis-content">
+                    <div class="analysis-box">
+                        <h3>Chi-Square Test Results</h3>
+                        <div id="chiSquareResults">
+                            <p>Run analysis to see results</p>
+                        </div>
+                    </div>
+                    <div class="analysis-box">
+                        <h3>Distribution Properties</h3>
+                        <div id="distributionProperties">
+                            <p>Run analysis to see results</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Algorithm Performance -->
+        <section class="performance-section">
+            <div class="container">
+                <h2>Algorithm Performance Analysis</h2>
+                <div class="performance-box">
+                    <h3>Time Complexity Comparison</h3>
+                    <canvas id="performanceChart"></canvas>
+                </div>
+                <div class="performance-details">
+                    <div class="detail-item">
+                        <h4>Fisher-Yates Shuffle (Las Vegas)</h4>
+                        <p><strong>Time Complexity:</strong> O(n)</p>
+                        <p><strong>Correctness:</strong> Guaranteed uniform permutation</p>
+                        <p><strong>Performance:</strong> Optimal for generating random arrangements</p>
+                    </div>
+                    <div class="detail-item">
+                        <h4>Randomised Selection (Las Vegas)</h4>
+                        <p><strong>Time Complexity:</strong> O(n) average, O(n²) worst</p>
+                        <p><strong>Correctness:</strong> Always finds correct k-th element</p>
+                        <p><strong>Performance:</strong> Efficient for finding lottery patterns</p>
+                    </div>
+                    <div class="detail-item">
+                        <h4>Monte Carlo Sampling</h4>
+                        <p><strong>Time Complexity:</strong> O(n)</p>
+                        <p><strong>Correctness:</strong> High probability correctness</p>
+                        <p><strong>Performance:</strong> Excellent for approximations and simulations</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Insights Section -->
+        <section class="insights-section">
+            <div class="container">
+                <h2>Key Insights from Analysis</h2>
+                <div class="insights-grid">
+                    <div class="insight-card">
+                        <h3>Uniform Distribution</h3>
+                        <p>Randomised algorithms produce nearly uniform distributions when using proper random generators. Numbers appear with approximately equal frequency.</p>
+                    </div>
+                    <div class="insight-card">
+                        <h3>Entropy & Randomness</h3>
+                        <p>High entropy indicates good randomness. The lottery system should have high entropy to ensure unpredictability and fairness.</p>
+                    </div>
+                    <div class="insight-card">
+                        <h3>Law of Large Numbers</h3>
+                        <p>As iterations increase, the observed frequency distribution converges to theoretical uniform distribution, validating our randomised algorithms.</p>
+                    </div>
+                    <div class="insight-card">
+                        <h3>Efficiency Trade-offs</h3>
+                        <p>Monte Carlo methods provide fast approximations while Las Vegas algorithms guarantee correctness, each suited for different scenarios.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <footer>
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-section">
+                    <h4>Project</h4>
+                    <p>Lottery Number Analysis Using Randomised Algorithms</p>
+                </div>
+                <div class="footer-section">
+                    <h4>Quick Links</h4>
+                    <ul>
+                        <li><a href="index.html">Home</a></li>
+                        <li><a href="algorithms.html">Algorithms</a></li>
+                        <li><a href="analysis.html">Analysis</a></li>
+                    </ul>
+                </div>
+                <div class="footer-section">
+                    <h4>Subject</h4>
+                    <p>Design and Analysis of Algorithms (DAA)</p>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2026 Lottery Number Analysis Project. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <style>
+        .page-header {
+            background: linear-gradient(135deg, var(--primary-color) 0%, var(--secondary-color) 100%);
+            color: white;
+            padding: 60px 20px;
+            text-align: center;
+        }
+
+        .page-header h1 {
+            font-size: 2.5rem;
+            margin-bottom: 10px;
+        }
+
+        .page-header p {
+            font-size: 1.1rem;
+            opacity: 0.9;
+        }
+
+        .controls-section {
+            padding: 60px 20px;
+            background: var(--light-bg);
+        }
+
+        .control-panel {
+            background: white;
+            padding: 40px;
+            border-radius: 10px;
+            box-shadow: var(--shadow);
+        }
+
+        .control-panel h2 {
+            margin-bottom: 30px;
+            color: var(--primary-color);
+        }
+
+        .controls-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 20px;
+            align-items: end;
+        }
+
+        .control-group {
+            display: flex;
+            flex-direction: column;
+        }
+
+        .control-group label {
+            margin-bottom: 8px;
+            font-weight: 600;
+            color: var(--text-dark);
+        }
+
+        .control-group input {
+            padding: 10px;
+            border: 1px solid var(--border-color);
+            border-radius: 5px;
+            font-size: 1rem;
+        }
+
+        .control-group input:focus {
+            outline: none;
+            border-color: var(--primary-color);
+            box-shadow: 0 0 0 3px rgba(99, 102, 241, 0.1);
+        }
+
+        .analysis-results {
+            padding: 60px 20px;
+        }
+
+        .analysis-results h2 {
+            margin-bottom: 40px;
+            text-align: center;
+        }
+
+        .results-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 30px;
+        }
+
+        .result-card {
+            background: linear-gradient(135deg, var(--primary-color) 0%, var(--secondary-color) 100%);
+            color: white;
+            padding: 30px;
+            border-radius: 10px;
+            text-align: center;
+            box-shadow: var(--shadow);
+        }
+
+        .result-card h3 {
+            margin-bottom: 15px;
+            font-size: 1rem;
+            opacity: 0.9;
+        }
+
+        .result-value {
+            font-size: 2.5rem;
+            font-weight: 800;
+        }
+
+        .charts-section {
+            padding: 60px 20px;
+            background: var(--light-bg);
+        }
+
+        .charts-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 40px;
+            margin-bottom: 40px;
+        }
+
+        .chart-container {
+            background: white;
+            padding: 30px;
+            border-radius: 10px;
+            box-shadow: var(--shadow);
+        }
+
+        .chart-container h3 {
+            margin-bottom: 20px;
+            color: var(--primary-color);
+            text-align: center;
+        }
+
+        .chart-container canvas {
+            max-height: 300px;
+        }
+
+        .stats-analysis {
+            padding: 60px 20px;
+        }
+
+        .stats-analysis h2 {
+            margin-bottom: 40px;
+            text-align: center;
+        }
+
+        .analysis-content {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 30px;
+        }
+
+        .analysis-box {
+            background: var(--light-bg);
+            padding: 30px;
+            border-radius: 10px;
+            border-left: 4px solid var(--primary-color);
+        }
+
+        .analysis-box h3 {
+            margin-bottom: 20px;
+            color: var(--primary-color);
+        }
+
+        .performance-section {
+            padding: 60px 20px;
+            background: var(--light-bg);
+        }
+
+        .performance-section h2 {
+            margin-bottom: 40px;
+            text-align: center;
+        }
+
+        .performance-box {
+            background: white;
+            padding: 40px;
+            border-radius: 10px;
+            box-shadow: var(--shadow);
+            margin-bottom: 40px;
+        }
+
+        .performance-box canvas {
+            max-height: 350px;
+        }
+
+        .performance-details {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 30px;
+        }
+
+        .detail-item {
+            background: white;
+            padding: 25px;
+            border-radius: 10px;
+            box-shadow: var(--shadow);
+        }
+
+        .detail-item h4 {
+            color: var(--primary-color);
+            margin-bottom: 15px;
+        }
+
+        .detail-item p {
+            margin-bottom: 10px;
+            color: var(--text-light);
+            line-height: 1.8;
+        }
+
+        .insights-section {
+            padding: 60px 20px;
+        }
+
+        .insights-section h2 {
+            margin-bottom: 40px;
+            text-align: center;
+        }
+
+        .insights-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 30px;
+        }
+
+        .insight-card {
+            background: linear-gradient(135deg, rgba(99, 102, 241, 0.1) 0%, rgba(139, 92, 246, 0.1) 100%);
+            padding: 30px;
+            border-radius: 10px;
+            border-left: 4px solid var(--primary-color);
+        }
+
+        .insight-card h3 {
+            color: var(--primary-color);
+            margin-bottom: 15px;
+        }
+
+        .insight-card p {
+            color: var(--text-light);
+            line-height: 1.8;
+        }
+
+        .table-wrapper {
+            overflow-x: auto;
+            margin-top: 30px;
+        }
+
+        .comparison-table {
+            width: 100%;
+            border-collapse: collapse;
+            background: white;
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: var(--shadow);
+        }
+
+        .comparison-table thead {
+            background: linear-gradient(135deg, var(--primary-color) 0%, var(--secondary-color) 100%);
+            color: white;
+        }
+
+        .comparison-table th {
+            padding: 20px;
+            text-align: left;
+            font-weight: 600;
+        }
+
+        .comparison-table td {
+            padding: 15px 20px;
+            border-bottom: 1px solid var(--border-color);
+        }
+
+        .comparison-table tbody tr:hover {
+            background: var(--light-bg);
+        }
+
+        @media (max-width: 768px) {
+            .controls-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .charts-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+
+    <script src="analysis.js"></script>
+</body>
+</html>

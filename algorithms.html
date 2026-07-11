@@ -1,0 +1,322 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Randomised Algorithms | Lottery Analysis</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <header>
+        <nav class="navbar">
+            <div class="nav-container">
+                <div class="logo">🎰 Lottery Analyzer</div>
+                <ul class="nav-menu">
+                    <li><a href="index.html">Home</a></li>
+                    <li><a href="algorithms.html" class="active">Algorithms</a></li>
+                    <li><a href="analysis.html">Analysis</a></li>
+                    <li><a href="index.html#about">About</a></li>
+                </ul>
+            </div>
+        </nav>
+    </header>
+
+    <main>
+        <!-- Page Header -->
+        <section class="page-header">
+            <div class="container">
+                <h1>Randomised Algorithms</h1>
+                <p>Understanding algorithms that use randomness to solve computational problems</p>
+            </div>
+        </section>
+
+        <!-- Algorithms Grid -->
+        <section class="algorithms-section">
+            <div class="container">
+                <div class="algorithm">
+                    <div class="algo-header">
+                        <h2>1. Randomised Quick Sort</h2>
+                        <span class="complexity">Average: O(n log n)</span>
+                    </div>
+                    <div class="algo-content">
+                        <div class="algo-description">
+                            <h3>Description</h3>
+                            <p>Randomised Quick Sort selects a random pivot element instead of choosing from a fixed position. This helps avoid worst-case scenarios where the pivot divides the array poorly.</p>
+                        </div>
+                        <div class="algo-code">
+                            <h3>Pseudocode</h3>
+                            <pre>RANDOMIZED-QUICKSORT(A, p, r)
+    if p < r
+        q = RANDOMIZED-PARTITION(A, p, r)
+        RANDOMIZED-QUICKSORT(A, p, q-1)
+        RANDOMIZED-QUICKSORT(A, q+1, r)
+
+RANDOMIZED-PARTITION(A, p, r)
+    i = RANDOM(p, r)
+    exchange A[r] with A[i]
+    return PARTITION(A, p, r)</pre>
+                        </div>
+                        <div class="algo-analysis">
+                            <h3>Analysis</h3>
+                            <ul>
+                                <li><strong>Worst Case:</strong> O(n²)</li>
+                                <li><strong>Average Case:</strong> O(n log n)</li>
+                                <li><strong>Space Complexity:</strong> O(log n) - due to recursion</li>
+                                <li><strong>Advantages:</strong> Eliminates worst-case input patterns</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="algorithm">
+                    <div class="algo-header">
+                        <h2>2. Randomised Selection</h2>
+                        <span class="complexity">Average: O(n)</span>
+                    </div>
+                    <div class="algo-content">
+                        <div class="algo-description">
+                            <h3>Description</h3>
+                            <p>This algorithm finds the k-th smallest element in an unsorted array using randomisation. It's similar to Quick Sort but only recursively searches one partition.</p>
+                        </div>
+                        <div class="algo-code">
+                            <h3>Pseudocode</h3>
+                            <pre>RANDOMIZED-SELECT(A, p, r, i)
+    if p == r
+        return A[p]
+    q = RANDOMIZED-PARTITION(A, p, r)
+    k = q - p + 1
+    if i == k
+        return A[q]
+    elseif i < k
+        return RANDOMIZED-SELECT(A, p, q-1, i)
+    else
+        return RANDOMIZED-SELECT(A, q+1, r, i-k)</pre>
+                        </div>
+                        <div class="algo-analysis">
+                            <h3>Analysis</h3>
+                            <ul>
+                                <li><strong>Worst Case:</strong> O(n²)</li>
+                                <li><strong>Average Case:</strong> O(n)</li>
+                                <li><strong>Space Complexity:</strong> O(log n)</li>
+                                <li><strong>Use Case:</strong> Finding median and k-th order statistics</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="algorithm">
+                    <div class="algo-header">
+                        <h2>3. Monte Carlo Method</h2>
+                        <span class="complexity">Probabilistic: O(n)</span>
+                    </div>
+                    <div class="algo-content">
+                        <div class="algo-description">
+                            <h3>Description</h3>
+                            <p>Uses random sampling to estimate numerical values or probabilities. Particularly useful for complex numerical problems and simulating probability distributions.</p>
+                        </div>
+                        <div class="algo-code">
+                            <h3>Pseudocode</h3>
+                            <pre>MONTE-CARLO-SIMULATION(iterations)
+    successes = 0
+    for i = 1 to iterations
+        x = RANDOM(0, 1)
+        y = RANDOM(0, 1)
+        if x² + y² ≤ 1
+            successes = successes + 1
+    estimate = 4 * successes / iterations
+    return estimate</pre>
+                        </div>
+                        <div class="algo-analysis">
+                            <h3>Analysis</h3>
+                            <ul>
+                                <li><strong>Accuracy:</strong> Improves with more iterations</li>
+                                <li><strong>Error Bound:</strong> O(1/√n)</li>
+                                <li><strong>Applications:</strong> π estimation, integration, sampling</li>
+                                <li><strong>Advantage:</strong> Easy to parallelize and scale</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="algorithm">
+                    <div class="algo-header">
+                        <h2>4. Las Vegas Algorithm (Randomised Shuffle)</h2>
+                        <span class="complexity">Average: O(n)</span>
+                    </div>
+                    <div class="algo-content">
+                        <div class="algo-description">
+                            <h3>Description</h3>
+                            <p>Fisher-Yates shuffle algorithm generates a random permutation of an array. Always produces correct result but runtime varies.</p>
+                        </div>
+                        <div class="algo-code">
+                            <h3>Pseudocode</h3>
+                            <pre>RANDOMIZE-IN-PLACE(A)
+    n = A.length
+    for i = 1 to n
+        j = RANDOM(i, n)
+        exchange A[i] with A[j]
+    return A</pre>
+                        </div>
+                        <div class="algo-analysis">
+                            <h3>Analysis</h3>
+                            <ul>
+                                <li><strong>Time Complexity:</strong> O(n)</li>
+                                <li><strong>Space Complexity:</strong> O(1)</li>
+                                <li><strong>Correctness:</strong> Guaranteed uniform distribution</li>
+                                <li><strong>Application:</strong> Shuffling arrays for lottery simulation</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="algorithm">
+                    <div class="algo-header">
+                        <h2>5. Randomised Karger's Algorithm</h2>
+                        <span class="complexity">Average: O(n²)</span>
+                    </div>
+                    <div class="algo-content">
+                        <div class="algo-description">
+                            <h3>Description</h3>
+                            <p>A randomised algorithm for finding minimum cuts in a graph. While primarily for graph problems, it demonstrates probabilistic reasoning applicable to optimization problems.</p>
+                        </div>
+                        <div class="algo-code">
+                            <h3>Pseudocode</h3>
+                            <pre>KARGER-MIN-CUT(G)
+    while G has more than 2 vertices
+        Choose edge (u, v) uniformly at random
+        Merge u and v into single vertex
+        Remove self-loops
+    return the two remaining supernodes</pre>
+                        </div>
+                        <div class="algo-analysis">
+                            <h3>Analysis</h3>
+                            <ul>
+                                <li><strong>Probability of Success:</strong> At least 1/n²</li>
+                                <li><strong>Repetitions Needed:</strong> O(n²) for high probability</li>
+                                <li><strong>Advantage:</strong> Simple elegant approach to hard problem</li>
+                                <li><strong>Use:</strong> Min-cut, network reliability</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Comparison Table -->
+        <section class="comparison-section">
+            <div class="container">
+                <h2>Algorithm Comparison</h2>
+                <div class="table-wrapper">
+                    <table class="comparison-table">
+                        <thead>
+                            <tr>
+                                <th>Algorithm</th>
+                                <th>Best Case</th>
+                                <th>Average Case</th>
+                                <th>Worst Case</th>
+                                <th>Space</th>
+                                <th>Type</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>Randomised Quick Sort</td>
+                                <td>O(n log n)</td>
+                                <td>O(n log n)</td>
+                                <td>O(n²)</td>
+                                <td>O(log n)</td>
+                                <td>Deterministic</td>
+                            </tr>
+                            <tr>
+                                <td>Randomised Selection</td>
+                                <td>O(n)</td>
+                                <td>O(n)</td>
+                                <td>O(n²)</td>
+                                <td>O(log n)</td>
+                                <td>Las Vegas</td>
+                            </tr>
+                            <tr>
+                                <td>Monte Carlo</td>
+                                <td>O(n)</td>
+                                <td>O(n)</td>
+                                <td>O(n)</td>
+                                <td>O(1)</td>
+                                <td>Monte Carlo</td>
+                            </tr>
+                            <tr>
+                                <td>Randomised Shuffle</td>
+                                <td>O(n)</td>
+                                <td>O(n)</td>
+                                <td>O(n)</td>
+                                <td>O(1)</td>
+                                <td>Las Vegas</td>
+                            </tr>
+                            <tr>
+                                <td>Karger's Algorithm</td>
+                                <td>O(n²)</td>
+                                <td>O(n²)</td>
+                                <td>O(n²)</td>
+                                <td>O(n²)</td>
+                                <td>Monte Carlo</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </section>
+
+        <!-- Key Concepts -->
+        <section class="concepts-section">
+            <div class="container">
+                <h2>Key Concepts in Randomised Algorithms</h2>
+                <div class="concepts-grid">
+                    <div class="concept">
+                        <h3>Las Vegas Algorithms</h3>
+                        <p>Always produce correct results but have randomised running time. Example: Randomised Quick Sort.</p>
+                    </div>
+                    <div class="concept">
+                        <h3>Monte Carlo Algorithms</h3>
+                        <p>Have deterministic running time but produce correct results with high probability. Used for approximations.</p>
+                    </div>
+                    <div class="concept">
+                        <h3>Probabilistic Analysis</h3>
+                        <p>Analyzes expected running time over all possible random choices for worst-case inputs.</p>
+                    </div>
+                    <div class="concept">
+                        <h3>Random Number Generation</h3>
+                        <p>Pseudo-random generators provide uniformly distributed values essential for algorithm correctness.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <footer>
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-section">
+                    <h4>Project</h4>
+                    <p>Lottery Number Analysis Using Randomised Algorithms</p>
+                </div>
+                <div class="footer-section">
+                    <h4>Quick Links</h4>
+                    <ul>
+                        <li><a href="index.html">Home</a></li>
+                        <li><a href="algorithms.html">Algorithms</a></li>
+                        <li><a href="analysis.html">Analysis</a></li>
+                    </ul>
+                </div>
+                <div class="footer-section">
+                    <h4>Subject</h4>
+                    <p>Design and Analysis of Algorithms (DAA)</p>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2026 Lottery Number Analysis Project. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script src="script.js"></script>
+</body>
+</html>
